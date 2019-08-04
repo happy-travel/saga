@@ -1,0 +1,14 @@
+{
+  "name": "happy-travel-test-api",
+  "version": "1.0.0",
+  "description": "testing API methods",
+  "scripts": {
+    "test": "ava"
+  },
+  "author": "Denis Sychev",
+  "license": "ISC",
+  "devDependencies": {
+    "ava": "^2.1.0",
+    "axios": "^0.19.0"
+  }
+}
