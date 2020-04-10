@@ -1,8 +1,7 @@
-const axios = require('axios');
+const axios = require('./node_modules/axios');
 
 function setToken(headers, token) {
-    if (token)
-    {
+    if (token) {
         if (!headers) {
             headers = {};
         }
@@ -11,22 +10,22 @@ function setToken(headers, token) {
     return headers;
 };
 
-function test_get(domain, method, params, token, headers) {    
+function get(domain, method, params, token, headers) {
     if (!headers && !token) {
         return params && axios.get(domain + method, { params: params }) || axios.get(domain + method);
     }
-    
+
     headers = setToken(headers, token);
     return params && axios.get(domain + method, { params: params, headers: headers }) || axios.get(domain + method, { headers: headers });
 };
 
-function test_post(domain, method, params, token, headers) {
+function post(domain, method, params, token, headers) {
     if (!headers && !token) {
         return axios.post(domain + method, params);
     }
-    
+
     headers = setToken(headers, token);
     return axios.post(domain + method, params, { headers: headers });
 };
 
-module.exports = { test_get, test_post };
+module.exports = { get, post };

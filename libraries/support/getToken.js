@@ -1,5 +1,4 @@
-const test_post = require('./methods').test_post;
-const environment = require('../environment').environment
+const post = require('./methods').post;
 
 async function getUserToken(name, password) {
   const domain = environment.tokenDev;
@@ -10,7 +9,7 @@ async function getUserToken(name, password) {
   }
 
   try {
-    const tokenData = await test_post(domain, method, params);
+    const tokenData = await post(domain, method, params);
     return tokenData.data;
   } catch (error) {
     console.error(error);
