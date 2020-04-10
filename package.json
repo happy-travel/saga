@@ -1,14 +1,24 @@
 {
-  "name": "happy-travel-test-api",
+  "name": "happy-travel-tests",
   "version": "1.0.0",
-  "description": "testing API methods",
+  "description": "",
+  "main": "index.js",
   "scripts": {
-    "test": "ava"
+    "test": "jest"
   },
   "author": "Denis Sychev",
   "license": "ISC",
   "devDependencies": {
-    "ava": "^2.1.0",
-    "axios": "^0.19.0"
+    "@babel/core": "^7.8.3",
+    "@babel/preset-env": "^7.8.3",
+    "axios": "^0.19.2",
+    "babel-jest": "^25.1.0",
+    "jest": "^25.1.0",
+    "jest-puppeteer": "^4.4.0",
+    "puppeteer": "^2.1.0"
+  },
+  "dependencies": {
+    "moment": "^2.24.0",
+    "@happy-travel/vault-client-js": "1.0.1"
   }
 }
