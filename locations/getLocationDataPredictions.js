@@ -1,8 +1,8 @@
 const get = require('../libraries/support/methods').get;
-const path = require('../libraries/support/vaultClient').path;
+const getPaths = require('../libraries/support/vaultClient').getPaths;
 
-async function getLocationPredictionsSearching(token, search) {
-    const url = await path();
+async function getLocationDataPredictions(token, search) {
+    const url = await getPaths();
     const domain = url.edo;
     const method = '/en/api/1.0/locations/predictions';
     const params = {
@@ -18,4 +18,4 @@ async function getLocationPredictionsSearching(token, search) {
     }
 }
 
-module.exports = { getLocationPredictionsSearching };
+module.exports = { getLocationDataPredictions };

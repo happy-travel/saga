@@ -8,16 +8,16 @@ let token = process.env.HTDC_VAULT_TOKEN;
 let options = new vaultOptions(baseUrl, engine, role);
 let client = new vaultClient(options);
 
-async function userData(position) {
+async function gatUserData(position) {
   await client.login(token);
-  let user = await client.get(`users/${position}`);
-  return user;
+  let userData = await client.get(`users/${position}`);
+  return userData;
 }
 
-async function path() {
+async function getPaths() {
   await client.login(token);
-  let url = await client.get('urls');
-  return url;
+  let urls = await client.get('urls');
+  return urls;
 }
 
-module.exports = { userData, path };
+module.exports = { gatUserData, getPaths };

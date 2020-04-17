@@ -1,8 +1,8 @@
 const get = require('../libraries/support/methods').get;
-const path = require('../libraries/support/vaultClient').path;
+const getPaths = require('../libraries/support/vaultClient').getPaths;
 
 async function getUserInfo(token) {
-  const url = await path();
+  const url = await getPaths();
   const domain = url.identity;
   const method = '/connect/userinfo';
 

@@ -1,15 +1,15 @@
-import { userData } from '../libraries/support/vaultClient';
+import { gatUserData } from '../libraries/support/vaultClient';
 import { getUserToken } from '../libraries/support/getToken';
 import { getAvailableCurrencies } from '../payments/getAvailableCurrencies';
 import { getListWorldRegions } from '../locations/getListWorldRegions';
 import { getCurrentAgent } from '../agents/getCurrentAgent';
 import { getUserInfo } from '../identity/getUserInfo';
-import { getLocationPredictionsSearching } from '../locations/getLocationPredictionsSearching';
+import { getLocationDataPredictions } from '../locations/getLocationDataPredictions';
 import { getListWorldCountries } from '../locations/getListWorldCountries';
 
 describe('accompanying methods', () => {
   test('GET ​/{culture}​/api​/{v}​/payments​/currencies', async () => {
-    const user = await userData("master");
+    const user = await gatUserData("master");
     const token = await getUserToken(user.login, user.password);
     const response = await getAvailableCurrencies(token);
 
@@ -21,8 +21,8 @@ describe('accompanying methods', () => {
     expect(response.data).toContain("SAR");
   });
 
-  test('GET ​/{culture}​/api​/{v}​/locations​/region', async () => {
-    const user = await userData("master");
+  test('GET ​/{culture}​/api​/{v}​/locations​/regions', async () => {
+    const user = await gatUserData("master");
     const token = await getUserToken(user.login, user.password);
     const response = await getListWorldRegions(token);
 
@@ -30,7 +30,7 @@ describe('accompanying methods', () => {
   });
 
   test('GET ​/{culture}​/api​/{v}​/agents', async () => {
-    const user = await userData("master");
+    const user = await gatUserData("master");
     const token = await getUserToken(user.login, user.password);
     const response = await getCurrentAgent(token);
 
@@ -42,7 +42,7 @@ describe('accompanying methods', () => {
   });
 
   test('GET /connect/userinfo', async () => {
-    const user = await userData("master");
+    const user = await gatUserData("master");
     const token = await getUserToken(user.login, user.password);
     const response = await getUserInfo(token);
 
@@ -52,15 +52,15 @@ describe('accompanying methods', () => {
   });
 
   test('GET /{culture}/api/{v}/locations/predictions', async () => {
-    const user = await userData("master");
+    const user = await gatUserData("master");
     const token = await getUserToken(user.login, user.password);
-    const response = await getLocationPredictionsSearching(token, "Dubai");
+    const response = await getLocationDataPredictions(token, "Dubai");
 
     expect(response.status).toBe(200);
   });
 
   test('GET ​/{culture}​/api​/{v}​/locations​/countries', async () => {
-    const user = await userData("master");
+    const user = await gatUserData("master");
     const token = await getUserToken(user.login, user.password);
     const response = await getListWorldCountries(token, "saudi");
 
@@ -70,7 +70,7 @@ describe('accompanying methods', () => {
   })
 
   test('GET ​/{culture}​/api​/{v}​/locations​/countries', async () => {
-    const user = await userData("master");
+    const user = await gatUserData("master");
     const token = await getUserToken(user.login, user.password);
     const response = await getListWorldCountries(token, "russia");
 

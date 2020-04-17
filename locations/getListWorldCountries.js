@@ -1,8 +1,8 @@
 const get = require('../libraries/support/methods').get;
-const path = require('../libraries/support/vaultClient').path;
+const getPaths = require('../libraries/support/vaultClient').getPaths;
 
 async function getListWorldCountries(token, search) {
-  const url = await path();
+  const url = await getPaths();
   const domain = url.edo;
   const method = '/en/api/1.0/locations/countries';
   const params = {

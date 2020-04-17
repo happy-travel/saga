@@ -1,8 +1,8 @@
 import { post } from './methods';
-import { path } from './vaultClient';
+import { getPaths } from './vaultClient';
 
 async function getUserToken(login, password) {
-  const url = await path();
+  const url = await getPaths();
   const domain = url.token;
   const method = '/token';
   const params = {
