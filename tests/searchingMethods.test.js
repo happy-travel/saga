@@ -4,6 +4,8 @@ import { getAccommodationsAvailable } from '../accommodations/getAccommodationsA
 
 describe('searching methods', () => {
   test('POST ​/{culture}​/api​/{v}​/availabilities​/accommodations Dubai per an adult', async () => {
+    let start = new Date().getTime();
+
     const user = await gatUserData("master");
     const token = await getUserToken(user.login, user.password);
     const roomDetails = [
@@ -16,9 +18,14 @@ describe('searching methods', () => {
 
     expect(response.status).toBe(200);
     expect(response.data.numberOfNights).toBe(7);
+
+    let end = new Date().getTime();
+    console.log(`Test POST ​/{culture}​/api​/{v}​/availabilities​/accommodations Dubai per an adult: ${(end - start)/1000}sec`);
   })
 
   test('POST ​/{culture}​/api​/{v}​/availabilities​/accommodations Dubai per an adult and a child (1 yr.)', async () => {
+    let start = new Date().getTime();
+
     const user = await gatUserData("master");
     const token = await getUserToken(user.login, user.password);
     const roomDetails = [
@@ -34,9 +41,14 @@ describe('searching methods', () => {
 
     expect(response.status).toBe(200);
     expect(response.data.numberOfNights).toBe(7);
+
+    let end = new Date().getTime();
+    console.log(`Test POST ​/{culture}​/api​/{v}​/availabilities​/accommodations Dubai per an adult and a child (1 yr.): ${(end - start)/1000}sec`);
   })
 
   test('POST ​/{culture}​/api​/{v}​/availabilities​/accommodations Dubai per an adult and a child (4 yrs.)', async () => {
+    let start = new Date().getTime();
+
     const user = await gatUserData("master");
     const token = await getUserToken(user.login, user.password);
     const roomDetails = [
@@ -52,9 +64,14 @@ describe('searching methods', () => {
 
     expect(response.status).toBe(200);
     expect(response.data.numberOfNights).toBe(7);
+
+    let end = new Date().getTime();
+    console.log(`Test POST ​/{culture}​/api​/{v}​/availabilities​/accommodations Dubai per an adult and a child (4 yrs.): ${(end - start)/1000}sec`);
   })
 
   test('POST ​/{culture}​/api​/{v}​/availabilities​/accommodations Dubai per 2 adults', async () => {
+    let start = new Date().getTime();
+
     const user = await gatUserData("master");
     const token = await getUserToken(user.login, user.password);
     const roomDetails = [
@@ -67,9 +84,14 @@ describe('searching methods', () => {
 
     expect(response.status).toBe(200);
     expect(response.data.numberOfNights).toBe(7);
+
+    let end = new Date().getTime();
+    console.log(`Test POST ​/{culture}​/api​/{v}​/availabilities​/accommodations Dubai per 2 adults: ${(end - start)/1000}sec`);
   })
 
   test('POST ​/{culture}​/api​/{v}​/availabilities​/accommodations Dubai per 2 adults and a child (3 yrs.)', async () => {
+    let start = new Date().getTime();
+
     const user = await gatUserData("master");
     const token = await getUserToken(user.login, user.password);
     const roomDetails = [
@@ -85,9 +107,14 @@ describe('searching methods', () => {
 
     expect(response.status).toBe(200);
     expect(response.data.numberOfNights).toBe(7);
+
+    let end = new Date().getTime();
+    console.log(`Test POST ​/{culture}​/api​/{v}​/availabilities​/accommodations Dubai per 2 adults and a child (3 yrs.): ${(end - start)/1000}sec`);
   })
 
   test('POST ​/{culture}​/api​/{v}​/availabilities​/accommodations Dubai per 2 adults and 2 children (1 yr. and 8 yrs.)', async () => {
+    let start = new Date().getTime();
+
     const user = await gatUserData("master");
     const token = await getUserToken(user.login, user.password);
     const roomDetails = [
@@ -104,9 +131,14 @@ describe('searching methods', () => {
 
     expect(response.status).toBe(200);
     expect(response.data.numberOfNights).toBe(7);
+
+    let end = new Date().getTime();
+    console.log(`Test POST ​/{culture}​/api​/{v}​/availabilities​/accommodations Dubai per 2 adults and 2 children (1 yr. and 8 yrs.): ${(end - start)/1000}sec`);
   })
 
   test('POST ​/{culture}​/api​/{v}​/availabilities​/accommodations Dubai per 2 adults and 2 children (5 yr. and 6 yrs.)', async () => {
+    let start = new Date().getTime();
+
     const user = await gatUserData("master");
     const token = await getUserToken(user.login, user.password);
     const roomDetails = [
@@ -123,9 +155,14 @@ describe('searching methods', () => {
 
     expect(response.status).toBe(200);
     expect(response.data.numberOfNights).toBe(7);
+
+    let end = new Date().getTime();
+    console.log(`Test POST ​/{culture}​/api​/{v}​/availabilities​/accommodations Dubai per 2 adults and 2 children (5 yr. and 6 yrs.): ${(end - start)/1000}sec`);
   })
 
   test('POST ​/{culture}​/api​/{v}​/availabilities​/accommodations Dubai per 3 adults', async () => {
+    let start = new Date().getTime();
+
     const user = await gatUserData("master");
     const token = await getUserToken(user.login, user.password);
     const roomDetails = [
@@ -138,9 +175,14 @@ describe('searching methods', () => {
 
     expect(response.status).toBe(200);
     expect(response.data.numberOfNights).toBe(7);
+
+    let end = new Date().getTime();
+    console.log(`Test POST ​/{culture}​/api​/{v}​/availabilities​/accommodations Dubai per 3 adults: ${(end - start)/1000}sec`);
   })
 
   test('POST ​/{culture}​/api​/{v}​/availabilities​/accommodations Dubai per 3 adults and a child (1 yr.)', async () => {
+    let start = new Date().getTime();
+
     const user = await gatUserData("master");
     const token = await getUserToken(user.login, user.password);
     const roomDetails = [
@@ -156,9 +198,14 @@ describe('searching methods', () => {
 
     expect(response.status).toBe(200);
     expect(response.data.numberOfNights).toBe(7);
+
+    let end = new Date().getTime();
+    console.log(`Test POST ​/{culture}​/api​/{v}​/availabilities​/accommodations Dubai per 3 adults and a child (1 yr.): ${(end - start)/1000}sec`);
   })
 
   test('POST ​/{culture}​/api​/{v}​/availabilities​/accommodations Dubai per 5 adults', async () => {
+    let start = new Date().getTime();
+
     const user = await gatUserData("master");
     const token = await getUserToken(user.login, user.password);
     const roomDetails = [
@@ -171,6 +218,9 @@ describe('searching methods', () => {
 
     expect(response.status).toBe(200);
     expect(response.data.numberOfNights).toBe(7);
+
+    let end = new Date().getTime();
+    console.log(`Test POST ​/{culture}​/api​/{v}​/availabilities​/accommodations Dubai per 5 adults: ${(end - start)/1000}sec`);
   })
 
 });

@@ -9,27 +9,39 @@ import { getListWorldCountries } from '../locations/getListWorldCountries';
 
 describe('accompanying methods', () => {
   test('GET ​/{culture}​/api​/{v}​/payments​/currencies', async () => {
+    let start = new Date().getTime();
+
     const user = await gatUserData("master");
     const token = await getUserToken(user.login, user.password);
     const response = await getAvailableCurrencies(token);
-
+    
     expect(response.status).toBe(200);
     expect(response.data).toContain("NotSpecified");
     expect(response.data).toContain("USD");
     expect(response.data).toContain("EUR");
     expect(response.data).toContain("AED");
     expect(response.data).toContain("SAR");
+
+    let end = new Date().getTime();
+    console.log(`Test GET ​/{culture}​/api​/{v}​/payments​/currencies: ${(end - start)/1000}sec`);
   });
 
   test('GET ​/{culture}​/api​/{v}​/locations​/regions', async () => {
+    let start = new Date().getTime();
+
     const user = await gatUserData("master");
     const token = await getUserToken(user.login, user.password);
     const response = await getListWorldRegions(token);
 
     expect(response.status).toBe(200);
+
+    let end = new Date().getTime();
+    console.log(`Test GET ​/{culture}​/api​/{v}​/locations​/regions: ${(end - start)/1000}sec`);
   });
 
   test('GET ​/{culture}​/api​/{v}​/agents', async () => {
+    let start = new Date().getTime();
+
     const user = await gatUserData("master");
     const token = await getUserToken(user.login, user.password);
     const response = await getCurrentAgent(token);
@@ -39,9 +51,14 @@ describe('accompanying methods', () => {
     expect(response.data.lastName).toContain("User");
     expect(response.data.firstName).toContain("Cloud");
     expect(response.data.position).toContain("Master");
+
+    let end = new Date().getTime();
+    console.log(`Test GET ​/{culture}​/api​/{v}​/agents: ${(end - start)/1000}sec`);
   });
 
   test('GET /connect/userinfo', async () => {
+    let start = new Date().getTime();
+
     const user = await gatUserData("master");
     const token = await getUserToken(user.login, user.password);
     const response = await getUserInfo(token);
@@ -49,17 +66,27 @@ describe('accompanying methods', () => {
     expect(response.status).toBe(200);
     expect(response.data.email).toContain(user.email);
     expect(response.data.email_verified).toBe(true);
+
+    let end = new Date().getTime();
+    console.log(`Test GET /connect/userinfo: ${(end - start)/1000}sec`);
   });
 
   test('GET /{culture}/api/{v}/locations/predictions', async () => {
+    let start = new Date().getTime();
+
     const user = await gatUserData("master");
     const token = await getUserToken(user.login, user.password);
     const response = await getLocationDataPredictions(token, "Dubai");
 
     expect(response.status).toBe(200);
+
+    let end = new Date().getTime();
+    console.log(`Test GET /{culture}/api/{v}/locations/predictions: ${(end - start)/1000}sec`);
   });
 
   test('GET ​/{culture}​/api​/{v}​/locations​/countries', async () => {
+    let start = new Date().getTime();
+
     const user = await gatUserData("master");
     const token = await getUserToken(user.login, user.password);
     const response = await getListWorldCountries(token, "saudi");
@@ -67,9 +94,14 @@ describe('accompanying methods', () => {
     expect(response.status).toBe(200);
     expect(response.data[0].code).toBe("SA");
     expect(response.data[0].name).toBe("Saudi Arabia");
+
+    let end = new Date().getTime();
+    console.log(`Test GET ​/{culture}​/api​/{v}​/locations​/countries for Saudi: ${(end - start)/1000}sec`);
   })
 
   test('GET ​/{culture}​/api​/{v}​/locations​/countries', async () => {
+    let start = new Date().getTime();
+
     const user = await gatUserData("master");
     const token = await getUserToken(user.login, user.password);
     const response = await getListWorldCountries(token, "russia");
@@ -77,6 +109,9 @@ describe('accompanying methods', () => {
     expect(response.status).toBe(200);
     expect(response.data[0].code).toBe("RU");
     expect(response.data[0].name).toBe("Russian Federation");
+
+    let end = new Date().getTime();
+    console.log(`Test GET ​/{culture}​/api​/{v}​/locations​/countries for Russia: ${(end - start)/1000}sec`);
   })
 
 })

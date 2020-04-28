@@ -11,7 +11,10 @@ async function getLocationDataPredictions(token, searchStringValue) {
     }
 
     try {
+        let start = new Date().getTime();
         const response = await get(domain, method, params, token);
+        let end = new Date().getTime();
+        console.log(`getLocationDataPredictions: ${(end - start) / 1000}sec`);
         return response;
     } catch (error) {
         console.error(error.response);

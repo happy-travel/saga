@@ -10,13 +10,19 @@ let client = new vaultClient(options);
 
 async function gatUserData(position) {
   await client.login(token);
+  let start = new Date().getTime();
   let userData = await client.get(`users/${position}`);
+  let end = new Date().getTime();
+  console.log(`gatUserData: ${(end - start) / 1000}sec`);
   return userData;
 }
 
 async function getPaths() {
   await client.login(token);
+  let start = new Date().getTime();
   let urls = await client.get('urls');
+  let end = new Date().getTime();
+  console.log(`getPaths: ${(end - start) / 1000}sec`);
   return urls;
 }
 

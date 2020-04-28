@@ -37,7 +37,10 @@ async function getAccommodationsAvailable(token, searchStringValue, roomDetails,
   }
 
   try {
+    let start = new Date().getTime();
     const response = await post(domain, method, params, token);
+    let end = new Date().getTime();
+    console.log(`getAccommodationsAvailable: ${(end - start)/1000}sec`);
     return response;
   } catch (error) {
     console.error(error.response);

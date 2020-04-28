@@ -11,7 +11,10 @@ async function getUserToken(login, password) {
   }
 
   try {
+    let start = new Date().getTime();
     const tokenData = await post(domain, method, params);
+    let end = new Date().getTime();
+    console.log(`getUserToken: ${(end - start)/1000}sec`);
     return tokenData.data;
   } catch (error) {
     console.error(error.response);
