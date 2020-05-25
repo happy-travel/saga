@@ -20,7 +20,7 @@ beforeAll(async () => {
   token = await getUserToken(user.login, user.password);
 });
 
-describe('accompanying methods', () => {
+describe.skip('accompanying methods', () => {
   test('GET ​/{culture}​/api​/{v}​/payments​/currencies', async () => {
     let start = new Date().getTime();
 
