@@ -15,7 +15,7 @@ async function getLocationData(token, searchStringValue) {
         }
     }
     if (searchStringValue === "Dubai") {
-        const fullName = "Dubai, United Arab Emirates";
+        const fullName = "Dubai, The United Arab Emirates";
         const searchObject = await getLocationObject(token, searchStringValue, fullName);
         const id = searchObject[0].id;
         const type = searchObject[0].type;
@@ -41,7 +41,7 @@ async function getLocationData(token, searchStringValue) {
         }
     }
     if (searchStringValue === "Conrad Dubai Hotel") {
-        const fullName = "Conrad Dubai Hotel, Dubai, United Arab Emirates";
+        const fullName = "Conrad Dubai Hotel, Dubai, The United Arab Emirates";
         const searchObject = await getLocationObject(token, searchStringValue, fullName);
         const id = searchObject[0].id;
         const type = searchObject[0].type;
