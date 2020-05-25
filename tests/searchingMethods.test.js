@@ -1,15 +1,36 @@
-import { gatUserData } from '../libraries/support/vaultClient';
+import { gatUserData, getPaths } from '../libraries/support/vaultClient';
 import { getUserToken } from '../libraries/support/getToken';
 import { getAccommodationsAvailable } from '../accommodations/getAccommodationsAvailable';
 
 let token;
+let edo;
 
 beforeAll(async () => {
+  let url = await getPaths();
+  edo = url.edo;
   let user = await gatUserData("master");
   token = await getUserToken(user.login, user.password);
 })
 
 describe('searching methods', () => {
+  test('POST ​/{culture}​/api​/{v}​/availabilities​/accommodations Vienna per an adult', async () => {
+    let start = new Date().getTime();
+
+    const roomDetails = [
+      {
+        "adultsNumber": 1,
+        "childrenNumber": 0
+      }
+    ];
+    const response = await getAccommodationsAvailable(edo, token, "Vienna", roomDetails, "saudi", "saudi");
+
+    expect(response.status).toBe(200);
+    expect(response.data.numberOfNights).toBe(7);
+
+    let end = new Date().getTime();
+    console.log(`Test POST ​/{culture}​/api​/{v}​/availabilities​/accommodations Vienna per an adult: ${(end - start) / 1000}sec`);
+  });
+
   test('POST ​/{culture}​/api​/{v}​/availabilities​/accommodations Dubai per an adult', async () => {
     let start = new Date().getTime();
 
@@ -19,7 +40,7 @@ describe('searching methods', () => {
         "childrenNumber": 0
       }
     ];
-    const response = await getAccommodationsAvailable(token, "Dubai", roomDetails, "saudi", "saudi");
+    const response = await getAccommodationsAvailable(edo, token, "Dubai", roomDetails, "saudi", "saudi");
 
     expect(response.status).toBe(200);
     expect(response.data.numberOfNights).toBe(7);
@@ -40,7 +61,7 @@ describe('searching methods', () => {
         ]
       }
     ];
-    const response = await getAccommodationsAvailable(token, "Dubai", roomDetails, "saudi", "saudi");
+    const response = await getAccommodationsAvailable(edo, token, "Dubai", roomDetails, "saudi", "saudi");
 
     expect(response.status).toBe(200);
     expect(response.data.numberOfNights).toBe(7);
@@ -61,7 +82,7 @@ describe('searching methods', () => {
         ]
       }
     ];
-    const response = await getAccommodationsAvailable(token, "Dubai", roomDetails, "saudi", "saudi");
+    const response = await getAccommodationsAvailable(edo, token, "Dubai", roomDetails, "saudi", "saudi");
 
     expect(response.status).toBe(200);
     expect(response.data.numberOfNights).toBe(7);
@@ -79,7 +100,7 @@ describe('searching methods', () => {
         "childrenNumber": 0
       }
     ];
-    const response = await getAccommodationsAvailable(token, "Dubai", roomDetails, "saudi", "saudi");
+    const response = await getAccommodationsAvailable(edo, token, "Dubai", roomDetails, "saudi", "saudi");
 
     expect(response.status).toBe(200);
     expect(response.data.numberOfNights).toBe(7);
@@ -100,7 +121,7 @@ describe('searching methods', () => {
         ]
       }
     ];
-    const response = await getAccommodationsAvailable(token, "Dubai", roomDetails, "saudi", "saudi");
+    const response = await getAccommodationsAvailable(edo, token, "Dubai", roomDetails, "saudi", "saudi");
 
     expect(response.status).toBe(200);
     expect(response.data.numberOfNights).toBe(7);
@@ -122,7 +143,7 @@ describe('searching methods', () => {
         ]
       }
     ];
-    const response = await getAccommodationsAvailable(token, "Dubai", roomDetails, "saudi", "saudi");
+    const response = await getAccommodationsAvailable(edo, token, "Dubai", roomDetails, "saudi", "saudi");
 
     expect(response.status).toBe(200);
     expect(response.data.numberOfNights).toBe(7);
@@ -144,7 +165,7 @@ describe('searching methods', () => {
         ]
       }
     ];
-    const response = await getAccommodationsAvailable(token, "Dubai", roomDetails, "saudi", "saudi");
+    const response = await getAccommodationsAvailable(edo, token, "Dubai", roomDetails, "saudi", "saudi");
 
     expect(response.status).toBe(200);
     expect(response.data.numberOfNights).toBe(7);
@@ -162,7 +183,7 @@ describe('searching methods', () => {
         "childrenNumber": 0
       }
     ];
-    const response = await getAccommodationsAvailable(token, "Dubai", roomDetails, "saudi", "saudi");
+    const response = await getAccommodationsAvailable(edo, token, "Dubai", roomDetails, "saudi", "saudi");
 
     expect(response.status).toBe(200);
     expect(response.data.numberOfNights).toBe(7);
@@ -183,7 +204,7 @@ describe('searching methods', () => {
         ]
       }
     ];
-    const response = await getAccommodationsAvailable(token, "Dubai", roomDetails, "saudi", "saudi");
+    const response = await getAccommodationsAvailable(edo, token, "Dubai", roomDetails, "saudi", "saudi");
 
     expect(response.status).toBe(200);
     expect(response.data.numberOfNights).toBe(7);
@@ -201,7 +222,7 @@ describe('searching methods', () => {
         "childrenNumber": 0
       }
     ];
-    const response = await getAccommodationsAvailable(token, "Dubai", roomDetails, "saudi", "saudi");
+    const response = await getAccommodationsAvailable(edo, token, "Dubai", roomDetails, "saudi", "saudi");
 
     expect(response.status).toBe(200);
     expect(response.data.numberOfNights).toBe(7);

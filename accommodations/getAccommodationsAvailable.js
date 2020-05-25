@@ -3,16 +3,13 @@ const getMonthsFuture = require('../libraries/support/getTime').getMonthFuture;
 const getMonthAndWeekFuture = require('../libraries/support/getTime').getMonthAndWeekFuture;
 const getLocationData = require('../libraries/data/getLocationData').getLocationData;
 const getWorldCountries = require('../locations/getListWorldCountries').getListWorldCountries;
-const getPaths = require('../libraries/support/vaultClient').getPaths;
 
-async function getAccommodationsAvailable(token, searchStringValue, roomDetails, guestNationality, guestResidency) {
+async function getAccommodationsAvailable(domain, token, searchStringValue, roomDetails, guestNationality, guestResidency) {
   const location = await getLocationData(token, searchStringValue);
   const nationality = await getWorldCountries(token, guestNationality);
   const residency = await getWorldCountries(token, guestResidency);
   const checkInDate = getMonthsFuture();
   const checkOutDate = getMonthAndWeekFuture();
-  const url = await getPaths();
-  const domain = url.edo;
   const method = '/en/api/1.0/availabilities/accommodations';
   const params = {
     "filters": "Default",

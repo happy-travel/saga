@@ -1,4 +1,4 @@
-import { gatUserData } from '../libraries/support/vaultClient';
+import { gatUserData, getPaths } from '../libraries/support/vaultClient';
 import { getUserToken } from '../libraries/support/getToken';
 import { getAvailableCurrencies } from '../payments/getAvailableCurrencies';
 import { getListWorldRegions } from '../locations/getListWorldRegions';
@@ -9,8 +9,13 @@ import { getListWorldCountries } from '../locations/getListWorldCountries';
 
 let token;
 let user;
+let edo;
+let identity;
 
 beforeAll(async () => {
+  let url = await getPaths();
+  edo = url.edo;
+  identity = url.identity;
   user = await gatUserData("master");
   token = await getUserToken(user.login, user.password);
 });
@@ -19,7 +24,7 @@ describe('accompanying methods', () => {
   test('GET ​/{culture}​/api​/{v}​/payments​/currencies', async () => {
     let start = new Date().getTime();
 
-    const response = await getAvailableCurrencies(token);
+    const response = await getAvailableCurrencies(edo, token);
 
     expect(response.status).toBe(200);
     expect(response.data).toContain("NotSpecified");
@@ -35,7 +40,7 @@ describe('accompanying methods', () => {
   test('GET ​/{culture}​/api​/{v}​/locations​/regions', async () => {
     let start = new Date().getTime();
 
-    const response = await getListWorldRegions(token);
+    const response = await getListWorldRegions(edo, token);
 
     expect(response.status).toBe(200);
 
@@ -46,7 +51,7 @@ describe('accompanying methods', () => {
   test('GET ​/{culture}​/api​/{v}​/agents', async () => {
     let start = new Date().getTime();
 
-    const response = await getCurrentAgent(token);
+    const response = await getCurrentAgent(edo, token);
 
     expect(response.status).toBe(200);
     expect(response.data.email).toContain(user.email);
@@ -61,7 +66,7 @@ describe('accompanying methods', () => {
   test('GET /connect/userinfo', async () => {
     let start = new Date().getTime();
 
-    const response = await getUserInfo(token);
+    const response = await getUserInfo(identity, token);
 
     expect(response.status).toBe(200);
     expect(response.data.email).toContain(user.email);
@@ -71,10 +76,10 @@ describe('accompanying methods', () => {
     console.log(`Test GET /connect/userinfo: ${(end - start) / 1000}sec`);
   });
 
-  test('GET /{culture}/api/{v}/locations/predictions', async () => {
+  test('GET /{culture}/api/{v}/locations/predictions "Dubai"', async () => {
     let start = new Date().getTime();
 
-    const response = await getLocationDataPredictions(token, "Dubai");
+    const response = await getLocationDataPredictions(edo, token, "Dubai");
 
     expect(response.status).toBe(200);
 
@@ -82,10 +87,10 @@ describe('accompanying methods', () => {
     console.log(`Test GET /{culture}/api/{v}/locations/predictions: ${(end - start) / 1000}sec`);
   });
 
-  test('GET ​/{culture}​/api​/{v}​/locations​/countries', async () => {
+  test('GET ​/{culture}​/api​/{v}​/locations​/countries "saudi"', async () => {
     let start = new Date().getTime();
 
-    const response = await getListWorldCountries(token, "saudi");
+    const response = await getListWorldCountries(edo, token, "saudi");
 
     expect(response.status).toBe(200);
     expect(response.data[0].code).toBe("SA");
@@ -95,10 +100,10 @@ describe('accompanying methods', () => {
     console.log(`Test GET ​/{culture}​/api​/{v}​/locations​/countries for Saudi: ${(end - start) / 1000}sec`);
   })
 
-  test('GET ​/{culture}​/api​/{v}​/locations​/countries', async () => {
+  test('GET ​/{culture}​/api​/{v}​/locations​/countries "russia"', async () => {
     let start = new Date().getTime();
 
-    const response = await getListWorldCountries(token, "russia");
+    const response = await getListWorldCountries(edo, token, "russia");
 
     expect(response.status).toBe(200);
     expect(response.data[0].code).toBe("RU");

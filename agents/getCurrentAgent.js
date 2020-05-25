@@ -1,9 +1,6 @@
 const get = require('../libraries/support/methods').get;
-const getPaths = require('../libraries/support/vaultClient').getPaths;
 
-async function getCurrentAgent(token) {
-  const url = await getPaths();
-  const domain = url.edo;
+async function getCurrentAgent(domain, token) {
   const method = '/en/api/1.0/agents';
 
   try {
