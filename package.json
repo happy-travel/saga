@@ -1,7 +1,7 @@
 {
-  "name": "happy-travel-tests",
+  "name": "happytravel_tests",
   "version": "1.0.0",
-  "description": "",
+  "description": "HappyTravel's Tests",
   "main": "index.js",
   "scripts": {
     "test": "jest"
@@ -9,16 +9,16 @@
   "author": "Denis Sychev",
   "license": "ISC",
   "devDependencies": {
-    "@babel/core": "^7.8.3",
-    "@babel/preset-env": "^7.8.3",
-    "axios": "^0.19.2",
-    "babel-jest": "^25.1.0",
-    "jest": "^25.1.0",
-    "jest-puppeteer": "^4.4.0",
-    "puppeteer": "^2.1.0"
+    "@babel/core": "^7.10.1",
+    "@babel/preset-env": "^7.10.1",
+    "babel-jest": "^26.0.1",
+    "jest": "^26.0.1"
   },
   "dependencies": {
-    "moment": "^2.24.0",
-    "@happy-travel/vault-client-js": "1.0.1"
+    "@happy-travel/vault-client-js": "1.0.1",
+    "axios": "^0.19.2",
+    "faker": "^4.1.0",
+    "moment": "^2.26.0",
+    "uuidv4": "^6.1.0"
   }
 }
