@@ -16,7 +16,7 @@ function getMonthFuture() {
 
 function getMonthAndWeekFuture() {
     moment.locale();
-    const date = moment().add(1, 'month').add(7, 'days');
+    const date = moment().add(1, 'month').add(4, 'days');
     const futureMonthAndWeek = date.format('YYYY-MM-DD');
     return futureMonthAndWeek;
 };
