@@ -1,16 +1,12 @@
 const get = require('../libraries/support/methods').get;
-const getPaths = require('../libraries/support/vaultClient').getPaths;
 
-async function getCurrentAgent(token) {
-  const url = await getPaths();
-  const domain = url.edo;
+async function getCurrentAgent(domain, token) {
   const method = '/en/api/1.0/agents';
 
   try {
-    let start = new Date().getTime();
+    console.time('getCurrentAgent');
     const response = await get(domain, method, null, token);
-    let end = new Date().getTime();
-    console.log(`getCurrentAgent: ${(end - start)/1000}sec`);
+    console.timeEnd('getCurrentAgent');
     return response;
   } catch (error) {
     console.error(error.response);

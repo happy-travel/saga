@@ -8,22 +8,20 @@ let token = process.env.HTDC_VAULT_TOKEN;
 let options = new vaultOptions(baseUrl, engine, role);
 let client = new vaultClient(options);
 
-async function gatUserData(position) {
+async function getUserData(position) {
   await client.login(token);
-  let start = new Date().getTime();
+  console.time('getUserData');
   let userData = await client.get(`users/${position}`);
-  let end = new Date().getTime();
-  console.log(`gatUserData: ${(end - start) / 1000}sec`);
+  console.timeEnd('getUserData');
   return userData;
 }
 
 async function getPaths() {
   await client.login(token);
-  let start = new Date().getTime();
+  console.time('getPaths');
   let urls = await client.get('urls');
-  let end = new Date().getTime();
-  console.log(`getPaths: ${(end - start) / 1000}sec`);
+  console.timeEnd('getPaths');
   return urls;
 }
 
-module.exports = { gatUserData, getPaths };
+module.exports = { getUserData, getPaths };
