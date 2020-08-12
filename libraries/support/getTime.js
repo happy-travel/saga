@@ -7,16 +7,16 @@ function getPresentTime() {
     return presentTime;
 }
 
-function getMonthFuture() {
+function getMonthFuture(month, day) {
     moment.locale();
-    const date = moment().add(1, 'month');
+    const date = moment().add(month, 'month').add(day, 'days');
     const futureMonth = date.format('YYYY-MM-DD');
     return futureMonth;
 };
 
-function getMonthAndWeekFuture() {
+function getMonthAndWeekFuture(month, week) {
     moment.locale();
-    const date = moment().add(1, 'month').add(4, 'days');
+    const date = moment().add(month, 'month').add(week, 'days');
     const futureMonthAndWeek = date.format('YYYY-MM-DD');
     return futureMonthAndWeek;
 };
