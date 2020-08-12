@@ -1,9 +1,9 @@
 const get = require('../libraries/support/methods').get;
 
-async function getWorldCountries(domain, token, search) {
+async function getWorldCountries(domain, token, countryName) {
   const method = '/en/api/1.0/locations/countries';
   const params = {
-    "query": search
+    "query": countryName
   }
 
   try {
