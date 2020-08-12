@@ -1,18 +1,20 @@
 const post = require('../libraries/support/methods').post;
 
-async function createBookingRecord(domain, token, availabilityId, nationality, residency, roomContractSetId, roomType, passengers, source) {
+async function createBookingRecord(domain, token, availabilityId, testParameters, roomContractSetId, roomType, source) {
+  let nationality = await testParameters.nationality();
+  let residency = await testParameters.residency();
   const method = `/en/api/1.0/accommodations/bookings`;
   const params = {
     "availabilityId": availabilityId,
     "nationality": nationality,
     "paymentMethod": "BankTransfer",
     "residency": residency,
-    "mainPassengerName": passengers[0].firstName + ' ' + passengers[0].lastName,
+    "mainPassengerName": testParameters.passengers[0].firstName + ' ' + testParameters.passengers[0].lastName,
     "roomContractSetId": roomContractSetId,
     "roomDetails": [
       {
         "type": roomType,
-        "passengers": passengers
+        "passengers": testParameters.passengers
       }
     ],
     "features": [],

@@ -1,18 +1,16 @@
 const post = require('../libraries/support/methods').post;
-const getMonthsFuture = require('../libraries/support/getTime').getMonthFuture;
-const getMonthAndWeekFuture = require('../libraries/support/getTime').getMonthAndWeekFuture;
 const getLocationData = require('../libraries/data/getLocationData').getLocationData;
 
-async function getAvailabilitySearchIdentifier(domain, token, searchStringValue, roomDetails, guestNationality, guestResidency) {
-  const location = await getLocationData(domain, token, searchStringValue);
-  const checkInDate = getMonthsFuture();
-  const checkOutDate = getMonthAndWeekFuture();
+async function getAvailabilitySearchIdentifier(domain, token, checkInDate, checkOutDate, testParameters) {
+  const location = await getLocationData(domain, token, testParameters.hotelName);
+  let guestNationality = await testParameters.nationality();
+  let guestResidency = await testParameters.residency();
   const method = '/en/api/1.0/availabilities/accommodations/searches';
   const params = {
     "filters": "Default",
     "checkInDate": `${checkInDate}T00:00:00Z`,
     "checkOutDate": `${checkOutDate}T00:00:00Z`,
-    "roomDetails": roomDetails,
+    "roomDetails": testParameters.roomDetails,
     "location": {
       "predictionResult": {
         "id": location.id,
