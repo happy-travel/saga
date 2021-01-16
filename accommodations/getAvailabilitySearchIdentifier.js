@@ -3,17 +3,14 @@ const getMonthsFuture = require('../libraries/support/getTime').getMonthFuture;
 const getMonthAndWeekFuture = require('../libraries/support/getTime').getMonthAndWeekFuture;
 const getLocationData = require('../libraries/data/getLocationData').getLocationData;
 const getWorldCountries = require('../locations/getListWorldCountries').getListWorldCountries;
-const getPaths = require('../libraries/support/vaultClient').getPaths;
 
-async function getAccommodationsAvailable(token, searchStringValue, roomDetails, guestNationality, guestResidency) {
-  const location = await getLocationData(token, searchStringValue);
-  const nationality = await getWorldCountries(token, guestNationality);
-  const residency = await getWorldCountries(token, guestResidency);
+async function getAvailabilitySearchIdentifier(domain, token, searchStringValue, roomDetails, guestNationality, guestResidency) {
+  const location = await getLocationData(domain, token, searchStringValue);
+  const nationality = await getWorldCountries(domain, token, guestNationality);
+  const residency = await getWorldCountries(domain, token, guestResidency);
   const checkInDate = getMonthsFuture();
   const checkOutDate = getMonthAndWeekFuture();
-  const url = await getPaths();
-  const domain = url.edo;
-  const method = '/en/api/1.0/availabilities/accommodations';
+  const method = '/en​/api​/1.0​/availabilities​/accommodations​/searches';
   const params = {
     "filters": "Default",
     "checkInDate": `${checkInDate}T00:00:00Z`,
@@ -22,7 +19,7 @@ async function getAccommodationsAvailable(token, searchStringValue, roomDetails,
     "location": {
       "predictionResult": {
         "id": location.id,
-        "sessionId": "33ac0405-6dbd-48d2-a8d8-5b27440d5b05", //anyone; it's doesn't matter
+        "sessionId": "76f75648-3bc5-4661-b907-8537fb512186", //anyone; it's doesn't matter
         "source": location.source,
         "type": location.type
       },
@@ -40,11 +37,11 @@ async function getAccommodationsAvailable(token, searchStringValue, roomDetails,
     let start = new Date().getTime();
     const response = await post(domain, method, params, token);
     let end = new Date().getTime();
-    console.log(`getAccommodationsAvailable: ${(end - start)/1000}sec`);
+    console.log(`getAvailabilitySearchIdentifier: ${(end - start)/1000}sec`);
     return response;
   } catch (error) {
     console.error(error.response);
   }
 };
 
-module.exports = { getAccommodationsAvailable };
+module.exports = { getAvailabilitySearchIdentifier };

@@ -1,13 +1,10 @@
 const get = require('../libraries/support/methods').get;
-const getPaths = require('../libraries/support/vaultClient').getPaths;
 
-async function getLocationDataPredictions(token, searchStringValue) {
-    const url = await getPaths();
-    const domain = url.edo;
+async function getLocationDataPredictions(domain, token, searchStringValue) {
     const method = '/en/api/1.0/locations/predictions';
     const params = {
         "query": searchStringValue,
-        "sessionId": "694417fb-fa2f-487c-a17f-7aa57b7150d8"
+        "sessionId": "76f75648-3bc5-4661-b907-8537fb512186"
     }
 
     try {
@@ -21,8 +18,8 @@ async function getLocationDataPredictions(token, searchStringValue) {
     }
 }
 
-async function getLocationObject(token, searchStringValue, fullName) {
-    const response = await getLocationDataPredictions(token, searchStringValue);
+async function getLocationObject(domain, token, searchStringValue, fullName) {
+    const response = await getLocationDataPredictions(domain, token, searchStringValue);
     const array = response.data;
     return array.filter(function (item) {
         return Object.keys(item).some(function (key) {
