@@ -1,16 +1,15 @@
 const get = require('../libraries/support/methods').get;
 
 async function getAvailableCurrencies(domain, token) {
-  const method = '/en/api/1.0/payments/currencies';
+  const method = `/en/api/1.0/payments/currencies`;
 
   try {
-    let start = new Date().getTime();
+    console.time('getAvailableCurrencies');
     const response = await get(domain, method, null, token);
-    let end = new Date().getTime();
-    console.log(`getAvailableCurrencies: ${(end - start) / 1000}sec`);
+    console.timeEnd('getAvailableCurrencies');
     return response;
   } catch (error) {
-    console.error(error.response);
+    console.error(error);
   }
 };
 

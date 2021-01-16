@@ -79,6 +79,32 @@ async function getLocationData(domain, token, searchStringValue) {
             source
         }
     }
+    if (searchStringValue === "hilton dubai the walk") {
+        const fullName = "Hilton Dubai The Walk (Ex Jumeirah Residences), Dubai, The United Arab Emirates";
+        const searchObject = await getLocationObject(domain, token, searchStringValue, fullName);
+        const id = '290fbb1a6d3642e3890007d0b8d62176';
+        const type = searchObject[0].type;
+        const source = searchObject[0].source;
+        return {
+            fullName,
+            id,
+            type,
+            source
+        }
+    }
+    if (searchStringValue === "ja beach hotel") {
+        const fullName = "Ja Beach Hotel, Dubai, The United Arab Emirates";
+        const searchObject = await getLocationObject(domain, token, searchStringValue, fullName);
+        const id = '6a0a677c845c404ba18cbeb274f799fc';
+        const type = searchObject[0].type;
+        const source = searchObject[0].source;
+        return {
+            fullName,
+            id,
+            type,
+            source
+        }
+    }
 }
 
 module.exports = { getLocationData };

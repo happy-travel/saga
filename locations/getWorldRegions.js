@@ -1,17 +1,16 @@
 const get = require('../libraries/support/methods').get;
 
-async function getListWorldRegions(domain, token) {
+async function getWorldRegions(domain, token) {
   const method = '/en/api/1.0/locations/regions';
 
   try {
-    let start = new Date().getTime();
+    console.time('getWorldRegions');
     const response = get(domain, method, null, token);
-    let end = new Date().getTime();
-    console.log(`getListWorldRegions: ${(end - start)/1000}sec`);
+    console.timeEnd('getWorldRegions');
     return (response);
   } catch (error) {
     console.error(error.response);
   }
 };
 
-module.exports = { getListWorldRegions };
+module.exports = { getWorldRegions };

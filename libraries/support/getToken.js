@@ -1,9 +1,6 @@
-import { post } from './methods';
-import { getPaths } from './vaultClient';
+const post = require('./methods').post;
 
-async function getUserToken(login, password) {
-  const url = await getPaths();
-  const domain = url.token;
+async function getUserToken(domain, login, password) {
   const method = '/token';
   const params = {
     "userName": login,
@@ -11,13 +8,12 @@ async function getUserToken(login, password) {
   }
 
   try {
-    let start = new Date().getTime();
-    const tokenData = await post(domain, method, params);
-    let end = new Date().getTime();
-    console.log(`getUserToken: ${(end - start)/1000}sec`);
+    console.time('getUserToken');
+    let tokenData = await post(domain, method, params);
+    console.timeEnd('getUserToken');
     return tokenData.data;
   } catch (error) {
-    console.error(error.response);
+    console.error(error);
   }
 };
 
