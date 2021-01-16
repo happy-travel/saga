@@ -1,16 +1,21 @@
 const post = require('../libraries/support/methods').post;
+const getMonthsFuture = require('../libraries/support/getTime').getMonthFuture;
+const getMonthAndWeekFuture = require('../libraries/support/getTime').getMonthAndWeekFuture;
 const getLocationData = require('../libraries/data/getLocationData').getLocationData;
+const getWorldCountries = require('../locations/getListWorldCountries').getListWorldCountries;
 
-async function getAvailabilitySearchIdentifier(domain, token, checkInDate, checkOutDate, testParameters) {
-  const location = await getLocationData(domain, token, testParameters.hotelName);
-  let guestNationality = await testParameters.nationality();
-  let guestResidency = await testParameters.residency();
-  const method = '/en/api/1.0/availabilities/accommodations/searches';
+async function getAvailabilitySearchIdentifier(domain, token, searchStringValue, roomDetails, guestNationality, guestResidency) {
+  const location = await getLocationData(domain, token, searchStringValue);
+  const nationality = await getWorldCountries(domain, token, guestNationality);
+  const residency = await getWorldCountries(domain, token, guestResidency);
+  const checkInDate = getMonthsFuture();
+  const checkOutDate = getMonthAndWeekFuture();
+  const method = '/en​/api​/1.0​/availabilities​/accommodations​/searches';
   const params = {
     "filters": "Default",
     "checkInDate": `${checkInDate}T00:00:00Z`,
     "checkOutDate": `${checkOutDate}T00:00:00Z`,
-    "roomDetails": testParameters.roomDetails,
+    "roomDetails": roomDetails,
     "location": {
       "predictionResult": {
         "id": location.id,
@@ -24,14 +29,15 @@ async function getAvailabilitySearchIdentifier(domain, token, checkInDate, check
       },
       "distance": 0
     },
-    "nationality": guestNationality,
-    "residency": guestResidency
+    "nationality": nationality.data[0].code,
+    "residency": residency.data[0].code
   }
 
   try {
-    console.time('getAvailabilitySearchIdentifier');
+    let start = new Date().getTime();
     const response = await post(domain, method, params, token);
-    console.timeEnd('getAvailabilitySearchIdentifier');
+    let end = new Date().getTime();
+    console.log(`getAvailabilitySearchIdentifier: ${(end - start)/1000}sec`);
     return response;
   } catch (error) {
     console.error(error.response);
